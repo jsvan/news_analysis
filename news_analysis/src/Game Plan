@@ -1,0 +1,35 @@
+The Evening Zeppelin
+
+
+Download articles on schedule, insert into database
+Articles are processed for NE's and sentiments
+==> List of tuples, NE and sentiment
+|------------|
+ SOURCE table
+ ANALYSIS table -- time, what, how, accum. scores
+|------------|
+write code to comb articletbl for 1 week chunks, collect sentiments/topic in that set, store outputs in table
+
+
+
+
+
+Test on a 12 articles, from 2 journals about the same subject
+
+1) Make up the NE's,
+2) Make up the sentiments,
+3) See what the output looks like. Can you plot it in any meaningful way?
+
+
+Replace words with NE's --hardcoded.
+President -> Trump
+Can we train a model to replace nouns with NE's?
+
+
+Look at how specific mentions of NE change over time
+Look at how bundling mentions of related NE's change over time
+
+
+Get collocation detector -- pretty detection of important social ideas going on
+http://www.nltk.org/howto/collocations.html
+

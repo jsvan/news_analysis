@@ -1,0 +1,9 @@
+TODO:
+
+Mail script
+allow people to send mails to themselves
+https://pepipost.com/tutorials/how-to-send-emails-with-javascript/
+
+/**
+
+**/

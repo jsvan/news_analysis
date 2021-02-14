@@ -1,0 +1,24 @@
+ Here are the people I mentioned:
+Karen Cerulo, order of news
+Jeffrey Alexander (Yale)--he wrote a lot, look specifically for work on political discourse and moral binaries;
+Austin Kozlowski (Chicago student), working on transformer models using news -- getting newspapers to article.  See his recent article in the American Sociological Review.
+Oscar Stuhler (NYU student) -- working on blocks of similar actors / actions -- not published yet.
+Some other of my students who might know stuff...
+Nick Judd -- knows computational stuff and knows political science stuff super well.
+Maurice Bokanga -- mathematical sociologist, not really text oriented, but interested in moral philosophy.
+Shilin Jia -- does computational analysis of political discourse, but more interested in change and creativity.  Working on google search data now.
+Then I have some younger students, Hyunku Kwon, XY Ma, who are also doing this stuff but maybe not far into it.
+There is a lot of work on how newspapers "frame" stories -- that is, how they say "what kind of an event this is" as a way of simplifying and adding moral valence.  Do you say there was a demonstration?  A riot?  Are the actors "the community" or "unknown elements"?  And so on.
+I will keep an eye out for papers from info science folks on automatic news writing.  But I don't that field.
+-j
+
+My notes:
+Jeffry Alexander wrote on moral binaries, i should cite him
+Oscar uses a dependency parser to break up what he gives to BERT
+for AI-produced news articles, made from scraping the web for news stories, could use our app to NOT take a story because its from a sketchy source
+What do people share more, sentiment-wise?
+How does sentiments appear on the page, in a 2d geometric sense (is it GOOD GOOD GOOD BAD BAD BAD, or GOOD BAD GOOD BAD etc)
+look towards computational social science, information schools
+scholar search for "Social Informatics"
+Go to FB/Google for internship on this stuff, that's where people are doing this work, political text analysis
+When I write my essays, think more on how should readers come to my ideas, not how did i arrive at them.

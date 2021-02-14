@@ -1,0 +1,11 @@
+1) Clustering of all sources --
+hope to see clusters match political leaning of what we'd expect
+
+2) sentiment over time for, say, FOX + Trump, overlaid on sentiment of all publishers
+(were there any dates they had way different take?),
+maybe with some date-wise indicator of significance
+
+3) Some analysis of volatility of subjects over time within publishers.
+What's a difference in news cycle make?
+
+4) clusterings of all newspapers per week, watch how they kind of float around.

@@ -1,0 +1,12 @@
+gmail_in: data emails raw
+gmail_out: data emails prepared
+homemade_data: data homemade
+info_dir: data
+bert_location: lib ABSA_BERT_MODEL
+get_home: .. ..#This is the inverse of "bert_location"
+bert_train_in: lib ABSA_BERT_MODEL data commonsents
+bert_process_loading_in: data bert_in
+bert_process_in: lib ABSA_BERT_MODEL data newsprepared# process_loop.py out, bert work.py in
+bert_process_out: lib ABSA_BERT_MODEL data newsprepared outputs
+matrix_out: data matrices# (will be data/matrices/publisher/day/ and THEN matrix_file. Matrix made from )
+rssfeedlist: src# rssfeeds.txt
