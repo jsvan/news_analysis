@@ -39,7 +39,7 @@ def save_matrices(out_dir, to_matrix, save_sentences):
         to_matrix looks like  {DATE: {PUBLISHER: {article: {named_ent: [1,2,3]}}}}
     """
     import os
-    from src.tools.sparse_matrix import jsv_dictmat
+    from news_analysis.src.tools.sparse_matrix import jsv_dictmat
     for today in to_matrix.keys():
         for publisher in to_matrix[today].keys():
             if not today:

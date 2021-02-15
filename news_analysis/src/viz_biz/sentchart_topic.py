@@ -1,9 +1,9 @@
-from src.tools import read_matrices
+from news_analysis.src.tools import read_matrices
 idx2word, word2idx = read_matrices.read_entities()
 from datetime import datetime, timedelta
 from matplotlib import pyplot
 import numpy as np
-from src.viz_biz.plot_design import mark
+from news_analysis.src.viz_biz.plot_design import mark
 DS={}
 
 class sentbydate:

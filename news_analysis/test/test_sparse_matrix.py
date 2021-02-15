@@ -1,5 +1,5 @@
 import unittest
-from src.tools.sparse_matrix import jsv_dictmat
+from news_analysis.src.tools.sparse_matrix import jsv_dictmat
 
 urdict = {(0, 100): [1, 1, 0], (1, 100): [3, 0, 1], (0, 15): [2, 2, 5], (2, 34): [0, 1, 2]}
 

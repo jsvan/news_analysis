@@ -1,5 +1,5 @@
 import os
-from src.tools.sparse_matrix import jsv_dictmat
+from news_analysis.src.tools.sparse_matrix import jsv_dictmat
 from math import sqrt
 from random import gauss, random, randint
 from math import exp

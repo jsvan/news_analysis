@@ -1,7 +1,7 @@
-from src.tools import getNews
-from database.code import mydb
+from news_analysis.src.tools import getNews
+from news_analysis.database.code import mydb
 from os import path
-from src.tools import prepare_news_article
+from news_analysis.src.tools import prepare_news_article
 
 class WF:
     """

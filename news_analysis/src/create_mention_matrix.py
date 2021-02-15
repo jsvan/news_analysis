@@ -1,5 +1,5 @@
-from database.code import mydb
-from src.tools import resolve_NE
+from news_analysis.database.code import mydb
+from news_analysis.src.tools import resolve_NE
 import langdetect
 import numpy as np
 import time

@@ -1,5 +1,5 @@
 from minisom import MiniSom
-from src.tools.read_matrices import read as RM
+from news_analysis.src.tools.read_matrices import read as RM
 import numpy as np
 # import pandas as pd
 import matplotlib.pyplot as plt

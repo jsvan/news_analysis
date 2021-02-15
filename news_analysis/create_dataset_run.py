@@ -1,1 +1,1 @@
-from src import create_dataset
+from news_analysis.src import create_dataset

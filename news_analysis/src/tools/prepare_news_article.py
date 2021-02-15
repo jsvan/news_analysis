@@ -3,7 +3,7 @@ from transformers import BertTokenizer
 from googletrans import Translator
 translator = Translator()
 import langdetect
-from src.tools import resolve_NE
+from news_analysis.src.tools import resolve_NE
 
 tokenizer = BertTokenizer.from_pretrained(os.path.join('lib','ABSA_BERT_MODEL','bert-linear-commonsents-finetune'))   # BertTokenizer.from_pretrained(os.path.join('..', 'ABSA_BERT', 'BERT-E2E-ABSA', "bert-linear-rest15-finetune"))
 import re

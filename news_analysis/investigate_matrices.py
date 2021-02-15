@@ -1,5 +1,5 @@
 import os
-from src.tools.sparse_matrix import jsv_dictmat
+from news_analysis.src.tools.sparse_matrix import jsv_dictmat
 
 with open("words2resolved.txt", encoding='utf-8') as F:
     idx2NE = {i:' '.join(x.split(' ')[1:]) for i, x in enumerate(F.read().split('\n')[:-1])}

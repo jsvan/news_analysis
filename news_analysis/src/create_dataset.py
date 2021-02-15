@@ -1,5 +1,5 @@
-from database.code import mydb
-from src.tools import resolve_NE
+from news_analysis.database.code import mydb
+from news_analysis.src.tools import resolve_NE
 from string import ascii_uppercase
 import langdetect
 import os

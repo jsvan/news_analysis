@@ -30,7 +30,7 @@ def read(shuffle=True, traintest=False, topicscount=True, nameslist=True, totalc
     if by != 'article' and by != 'week' and by != 'publisher':
         raise NameError(f"{by} not understood. Must be 'article', 'week' or 'publisher'.")
     print('reading data')
-    from src.tools.sparse_matrix import jsv_dictmat
+    from news_analysis.src.tools.sparse_matrix import jsv_dictmat
     import os
     names = {}
     colorspre, data = [], []

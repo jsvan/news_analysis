@@ -3,7 +3,7 @@ import numpy as np
 from scipy.sparse import dok_matrix
 from datetime import datetime
 import os
-from src.tools.sparse_matrix import jsv_dictmat
+from news_analysis.src.tools.sparse_matrix import jsv_dictmat
 
 
 def path2datetime(datepaththing):

@@ -3,8 +3,8 @@ import time
 from matplotlib import pyplot as plt
 from sklearn.decomposition import TruncatedSVD
 from sklearn.manifold import TSNE
-from src.tools import read_matrices
-from src.viz_biz.plot_design import mark
+from news_analysis.src.tools import read_matrices
+from news_analysis.src.viz_biz.plot_design import mark
 import random
 idx2word = {}
 

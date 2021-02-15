@@ -1,1 +1,1 @@
-from src import create_mention_matrix
+from news_analysis.src import create_mention_matrix

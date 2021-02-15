@@ -1,4 +1,4 @@
-from src.tools import read_matrices
+from news_analysis.src.tools import read_matrices
 DAYS_IN_WEEK = 7
 HISTORICAL_WINDOW = 6 * DAYS_IN_WEEK  # 6 weeks
 """

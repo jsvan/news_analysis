@@ -100,13 +100,13 @@ if FORCE_TRAIN or (start_time - timings['TRAIN']) >= ONE_WEEK:
 
     # put jsvsentilabel@gmail emails into ./emailscripts/datafiles
     print("Importing gmail")
-    from src.emailscripts import gmail
+    from news_analysis.src.emailscripts import gmail
     print("Running gmail")
     gmail.run(filepaths['gmail_in'], filepaths['gmail_out'], filepaths['info_dir'])
     
     # Creates train test sets
     print("importing create-train0-test-dev")
-    from src.emailscripts import create_train_test_dev
+    from news_analysis.src.emailscripts import create_train_test_dev
     print("Running cttd")
     create_train_test_dev.run(filepaths['gmail_out'], filepaths['homemade_data'], filepaths['bert_train_in'])
 
@@ -140,7 +140,7 @@ if FORCE_SPIDER or (time.time() - timings['SPIDER']) >= TWENTY_FOUR_HOURS:
     resetdir(filepaths['bert_process_loading_in'], [])
 
     print("PROCESS LOOP")
-    from src import process_loop
+    from news_analysis.src import process_loop
     process_loop.run(out_file=filepaths['bert_process_loading_in'],
                      feedlist=os.path.join(filepaths['rssfeedlist'], 'rssfeeds.txt')) #, fromdatabase=READDATABASE)
 
@@ -150,7 +150,7 @@ if FORCE_SPIDER or (time.time() - timings['SPIDER']) >= TWENTY_FOUR_HOURS:
     # Run the model on prepared articles
 
     print("BERT PROCESS BATCHES")
-    from src import bert_process_batch
+    from news_analysis.src import bert_process_batch
     #BERT_DIR, HOME_DIR, BATCH_DIR, BERT_IN_DIR, BERT_OUT_FILE
     bert_process_batch.run(BERT_DIR=filepaths['bert_location'],
                            HOME_DIR=filepaths['get_home'],
@@ -161,7 +161,7 @@ if FORCE_SPIDER or (time.time() - timings['SPIDER']) >= TWENTY_FOUR_HOURS:
 if True:
     print("RESULTS 2 MATRICES")
     # associate articles with sentiment scores
-    from src import results2matrix
+    from news_analysis.src import results2matrix
     results2matrix.run(filepaths['bert_process_loading_in'],
                        filepaths['matrix_out'])
 

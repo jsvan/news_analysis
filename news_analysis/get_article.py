@@ -1,4 +1,4 @@
-from database.code import mydb
+from news_analysis.database.code import mydb
 
 
 
