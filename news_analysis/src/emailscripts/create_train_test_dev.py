@@ -2,8 +2,8 @@ import os
 from transformers import BertTokenizer
 import random
 
-if not os.path.isdir(os.path.join( "ABSA_BERT_MODEL", "data")):
-    raise NotADirectoryError(os.path.join( "ABSA_BERT_MODEL", "data") )
+if not os.path.isdir(os.path.join( "news_analysis", "ABSA_BERT_MODEL", "data")):
+    raise NotADirectoryError(os.path.join( "news_analysis", "ABSA_BERT_MODEL", "data") )
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True, cache_dir=os.path.join( 'ABSA_BERT_MODEL', "cache"))
 
