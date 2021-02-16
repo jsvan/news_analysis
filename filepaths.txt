@@ -1,12 +1,12 @@
-gmail_in: news_analysis data emails raw
-gmail_out: news_analysis data emails prepared
-homemade_data: news_analysis data homemade
-info_dir: news_analysis data
-bert_location: news_analysis lib ABSA_BERT_MODEL
+gmail_in: jsvnews data emails raw
+gmail_out: jsvnews data emails prepared
+homemade_data: jsvnews data homemade
+info_dir: jsvnews data
+bert_location: jsvnews lib ABSA_BERT_MODEL
 get_home: .. .. ..#This is the inverse of "bert_location"
-bert_train_in: news_analysis lib ABSA_BERT_MODEL data commonsents
-bert_process_loading_in: news_analysis data bert_in
-bert_process_in: news_analysis lib ABSA_BERT_MODEL data newsprepared# process_loop.py out, bert work.py in
-bert_process_out: news_analysis lib ABSA_BERT_MODEL data newsprepared outputs
-matrix_out: news_analysis data matrices# (will be news_analysis/data/matrices/publisher/day/ and THEN matrix_file. Matrix made from )
-rssfeedlist: news_analysis src# rssfeeds.txt
+bert_train_in: jsvnews lib ABSA_BERT_MODEL data commonsents
+bert_process_loading_in: jsvnews data bert_in
+bert_process_in: jsvnews lib ABSA_BERT_MODEL data newsprepared# process_loop.py out, bert work.py in
+bert_process_out: jsvnews lib ABSA_BERT_MODEL data newsprepared outputs
+matrix_out: jsvnews data matrices# (will be jsvnews/data/matrices/publisher/day/ and THEN matrix_file. Matrix made from )
+rssfeedlist: jsvnews src# rssfeeds.txt
