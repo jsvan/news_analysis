@@ -57,8 +57,9 @@ def reset_all_dirs(filepaths):
 
 
 
-TIME_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'last_run_times.pkl')
-FILE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'filepaths.txt')
+TIME_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'utilities/last_run_times.pkl')
+FILE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'utilities/filepaths.txt')
+
 EPSILON = 10  # seconds
 ONE_HOUR = 3600
 TWENTY_FOUR_HOURS = (24 * ONE_HOUR) - EPSILON
@@ -67,6 +68,7 @@ FORCE_TRAIN = False
 FORCE_SPIDER = True
 RESET = False
 READDATABASE = 'articlesstormtrooper.db'
+
 try:
     with open(TIME_FILE, 'rb') as F:
         timings = pickle.load(F)
