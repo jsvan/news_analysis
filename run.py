@@ -2,6 +2,8 @@ import os
 import pickle
 import time
 
+print(os.path.dirname(os.path.abspath(__file__)))
+print(os.path.abspath(__file__))
 
 
 def mkdir(pathlist):
@@ -55,8 +57,8 @@ def reset_all_dirs(filepaths):
 
 
 
-TIME_FILE = 'last_run_times.pkl'
-FILE_FILE = 'filepaths.txt'
+TIME_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'last_run_times.pkl')
+FILE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'filepaths.txt')
 EPSILON = 10  # seconds
 ONE_HOUR = 3600
 TWENTY_FOUR_HOURS = (24 * ONE_HOUR) - EPSILON
@@ -73,6 +75,12 @@ except FileNotFoundError:
                'SPIDER': 0}
 
 # keys: 'gmail_in', 'gmail_out', 'bert_in', 'bert_out', 'matrix_out'
+import sys
+
+print('i am',os.path.dirname(sys.executable))
+print('or', os.path.dirname(os.path.realpath(__file__)))
+print(os.listdir())
+
 with open(FILE_FILE) as F:
     fps = [x.split('#')[0].split(' ') for x in F.read().split('\n') if x]
     filepaths = {x[0][:-1]:os.path.join(*x[1:]) for x in fps}

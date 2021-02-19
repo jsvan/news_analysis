@@ -2,7 +2,7 @@ from readability import Document
 import requests
 import re
 import feedparser
-
+from multiprocessing import Process
 
 from jsvnews.database.code import mydb
 

@@ -10,6 +10,7 @@ setup(name='jsvnews',
       version='0.1.0',
       author='Julian Vanecek',
       author_email='julian.vanecek@gmail.com',
-      packages=['jsvnews'],
+      packages=find_packages(),
       install_requires=deps,
+      url='www.github.com/jsvan',
       )
