@@ -2,11 +2,8 @@ from readability import Document
 import requests
 import re
 import feedparser
-from multiprocessing import Process
 
-from jsvnews.database.code import mydb
-
-
+from jsvnews.database import mydb
 
 
 def fromdb(databasename):

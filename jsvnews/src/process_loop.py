@@ -1,5 +1,5 @@
 from jsvnews.src.tools import getNews
-from jsvnews.database.code import mydb
+from jsvnews.database import mydb
 from os import path
 from jsvnews.src.tools import prepare_news_article
 
