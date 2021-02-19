@@ -1,10 +1,9 @@
-from jsvnews.database.code import mydb
+from jsvnews.database import mydb
 from jsvnews.src.tools import resolve_NE
 from string import ascii_uppercase
 import langdetect
 import os
-import re
-import random
+
 LIMIT = " "  # "LIMIT 10" Optional, default is ""
 DATASET_NAME = os.path.join("C:","Users","onion","PycharmProjects","jsvnews","database","dbs","censored_titles_set")
 # open(DATASET_NAME, 'w').close()  # Make sure got path okay

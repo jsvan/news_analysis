@@ -1,4 +1,4 @@
-from jsvnews.database.code import mydb
+from jsvnews.database import mydb
 from jsvnews.src.tools import resolve_NE
 import langdetect
 import numpy as np

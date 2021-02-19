@@ -1,6 +1,4 @@
-from jsvnews.database.code import mydb
-
-
+from jsvnews.database import mydb
 
 
 def getall():
