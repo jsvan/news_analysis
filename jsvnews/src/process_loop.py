@@ -1,7 +1,6 @@
-from jsvnews.src.tools import getNews
-from jsvnews.database import mydb
+from .tools import getNews,  prepare_news_article
+from ..database import mydb
 from os import path
-from jsvnews.src.tools import prepare_news_article
 
 class WF:
     """
