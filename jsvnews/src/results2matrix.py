@@ -1,7 +1,9 @@
 import os
-words2resolved_file = "words2resolved.txt"
+import definitions
+
+words2resolved_file = os.path.join(definitions.ROOT_DIR, "jsvnews", "utilities", "words2resolved.txt")
 with open(words2resolved_file, encoding='utf-8') as F:
-    NE2idx = {' '.join(x.split(' ')[1:]):i for i, x in enumerate(F.read().split('\n')[:-1])}
+    NE2idx = {' '.join(x.split(' ')[1:]).lower():i for i, x in enumerate(F.read().split('\n')[:-1])}
 print(f'we have {len(NE2idx)} named entities!')
 
 monthMap = {'January':'01', 'February':'02', 'March':'03', 'April':'04', 'May':'05', 'June':'06', 'July':'07', 'August':'08', 'September':'09','October':'10', 'November':'11', 'December':'12',
@@ -108,7 +110,10 @@ def run(batch_dir, out_dir):
                         break
 
                     sentence = sentence.replace(m.group(), m.group()[:-2]+'|'+labs[ii]+']]', 1)
-                    NE = NE2idx[m.group()[2:-2]]  # get rid of brackets ie: "[[stuff]]"
+                    try:
+                        NE = NE2idx[m.group()[2:-2].lower()]  # get rid of brackets ie: "[[stuff]]"
+                    except KeyError as e:
+                        print(e, e.__doc__)
                     ensure_pub_ent(to_matrix, timepublished, newspaper, artcount, NE)  # (dic, pub, art, ent)
                     if labs[ii] == 'NEG':
                         to_matrix[timepublished][newspaper][artcount][NE][0] += 1

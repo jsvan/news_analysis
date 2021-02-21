@@ -72,8 +72,8 @@ class Scraper:
                 #print("\nCollecting from", rss)
                 for entry in feedparser.parse(rss).entries:
                     try:
-                        #if count > 1: # return just 2
-                        #    break
+                        if count > 0: # return just 2
+                            break
                         count +=1
                         #print('\r', count, end='')
                         link = entry.link

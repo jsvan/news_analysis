@@ -1,6 +1,6 @@
 import sqlite3
 import os
-
+import definitions
 print(os.listdir('./'))
 
 NEWSPAPER_CMD = '''INSERT OR IGNORE INTO newspaper_tbl VALUES(NULL, ?);'''
@@ -34,7 +34,8 @@ class DB:
             print(E)
 
     def on_start(self):
-        self.db = sqlite3.connect(f'./jsvnews/database/dbs/{self.databasename}')
+        print(f'connecting to database: {definitions.ROOT_DIR}/jsvnews/database/dbs/{self.databasename}')
+        self.db = sqlite3.connect(f'{definitions.ROOT_DIR}/jsvnews/database/dbs/{self.databasename}')
         self.cursor = self.db.cursor()
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS article_tbl(

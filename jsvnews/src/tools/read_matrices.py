@@ -4,7 +4,7 @@ from scipy.sparse import dok_matrix
 from datetime import datetime
 import os
 from jsvnews.src.tools.sparse_matrix import jsv_dictmat
-
+from definitions import ROOT_DIR
 
 def path2datetime(datepaththing):
     """
@@ -142,7 +142,7 @@ def read(traintest=0, earlystop=.1, by="week", strongopinions=0):
         raise NameError(f"{by} not understood. Must be 'day', 'week' or 'publisher'.")
     print('reading data')
     names, data = {}, {}
-    matrix_folders = os.path.join('data', 'matrices')
+    matrix_folders = os.path.join(ROOT_DIR,'jsvnews', 'data', 'matrices')
     all_companies_folders = os.listdir(matrix_folders)
     """
                 Collect file paths:
@@ -195,10 +195,11 @@ def read_entities():
     In NE2idx I make a list of indeces bc there can be multiple names that map to the same name.
     :return: (idx2NE, NE2idx), two dicts
     """
-    with open("words2resolved.txt", encoding='utf-8') as F:
+    w2rtfilepath = os.path.join(ROOT_DIR, "jsvnews", "utilities", "words2resolved.txt")
+    with open(w2rtfilepath, encoding='utf-8') as F:
         idx2NE = {i: ' '.join(x.split(' ')[1:]).lower() for i, x in enumerate(F.read().split('\n')[:-1])}
 
-    with open("words2resolved.txt", encoding='utf-8') as F:
+    with open(w2rtfilepath, encoding='utf-8') as F:
         NE2idx = {}
         for i, x in enumerate(F.read().split('\n')[:-1]):
             word = ' '.join(x.split(' ')[1:]).lower()

@@ -3,13 +3,15 @@ import pickle
 import time
 
 
-verbose = False
+verbose = True
 
-cwd = os.getcwd()
+import definitions
+cwd = definitions.ROOT_DIR
 
 if verbose:
     print(os.path.dirname(os.path.abspath(__file__)))
     print(os.path.abspath(__file__))
+    print("root", cwd)
 
 
 def mkdir(pathlist):
@@ -27,10 +29,10 @@ def resetdir(path, files):
         print(f"Erasing {files} from {path}")
 
     if not files:
-        files = os.listdir(path)
+        files = os.listdir( path)
     for f in files:
         try:
-            os.remove(os.path.join(path, f))
+            os.remove(os.path.join( path, f))
         except FileNotFoundError:
             continue
 
@@ -66,10 +68,10 @@ def reset_all_dirs(filepaths):
         resetdir(filepaths[d], fs)
 
 
+print('cwd', os.getcwd())
 
-
-TIME_FILE = os.path.join(cwd, 'utilities', 'last_run_times.pkl')
-FILE_FILE = os.path.join(cwd, 'utilities', 'filepaths.txt')
+TIME_FILE = os.path.join(cwd, 'jsvnews', 'utilities', 'last_run_times.pkl')
+FILE_FILE = os.path.join(cwd, 'jsvnews','utilities', 'filepaths.txt')
 
 EPSILON = 10  # seconds
 ONE_HOUR = 3600
@@ -90,109 +92,111 @@ except FileNotFoundError:
 # keys: 'gmail_in', 'gmail_out', 'bert_in', 'bert_out', 'matrix_out'
 import sys
 
-if verbose:
-    print('i am',os.path.dirname(sys.executable))
-    print('or', os.path.dirname(os.path.realpath(__file__)))
-    print(os.listdir())
 
-with open(FILE_FILE) as F:
-    fps = [x.split('#')[0].split(' ') for x in F.read().split('\n') if x]
-    filepaths = {x[0][:-1]:os.path.join(*x[1:]) for x in fps}
+def run():
+    if verbose:
+        print('i am',os.path.dirname(sys.executable))
+        print('or', os.path.dirname(os.path.realpath(__file__)))
+        print(os.listdir())
 
-for x in fps:
-    mkdir(x[1:])
+    with open(FILE_FILE) as F:
+        fps = [x.split('#')[0].split(' ') for x in F.read().split('\n') if x]
+        filepaths = {x[0][:-1]:os.path.join(cwd, *x[1:]) for x in fps}
 
-
-if RESET:
-    reset_all_dirs(filepaths)
+    for x in fps:
+        mkdir(cwd.split(os.path.sep) + x[1:])
 
 
+    if RESET:
+        reset_all_dirs(filepaths)
 
 
-# TODO: Delete all temporary files after using them
 
-#  ~~~ TRAINING ~~~
-#  Grabs jsvsentilabel@gmail.com datapoints and trains on ALL points -- every 7 days
 
-start_time = time.time()
-print("Checking time")
+    # TODO: Delete all temporary files after using them
 
-if FORCE_TRAIN or (start_time - timings['TRAIN']) >= ONE_WEEK:
-    print("Within a week. Training!")
+    #  ~~~ TRAINING ~~~
+    #  Grabs jsvsentilabel@gmail.com datapoints and trains on ALL points -- every 7 days
 
-    # put jsvsentilabel@gmail emails into ./emailscripts/datafiles
-    print("Importing gmail")
-    from jsvnews.src.emailscripts import gmail
-    print("Running gmail")
-    gmail.run(filepaths['gmail_in'], filepaths['gmail_out'], filepaths['info_dir'])
-    
-    # Creates train test sets
-    print("importing create-train0-test-dev")
-    from jsvnews.src.emailscripts import create_train_test_dev
-    print("Running cttd")
-    create_train_test_dev.run(filepaths['gmail_out'], filepaths['homemade_data'], filepaths['bert_train_in'])
+    start_time = time.time()
+    print("Checking time")
 
-    # run training
-    print("training model")
-    os.chdir(filepaths["bert_location"])
-    print('dir:')
-    os.system('dir')
-    os.system("sh train.sh")
-    print("Finished training")
-    os.chdir(filepaths["get_home"])
-    timings['TRAIN'] = start_time
+    if FORCE_TRAIN or (start_time - timings['TRAIN']) >= ONE_WEEK:
+        print("Within a week. Training!")
+
+        # put jsvsentilabel@gmail emails into ./emailscripts/datafiles
+        print("Importing gmail")
+        from jsvnews.src.emailscripts import gmail
+        print("Running gmail")
+        gmail.run(filepaths['gmail_in'], filepaths['gmail_out'], filepaths['info_dir'])
+
+        # Creates train test sets
+        print("importing create-train0-test-dev")
+        from jsvnews.src.emailscripts import create_train_test_dev
+        print("Running cttd")
+        create_train_test_dev.run(filepaths['gmail_out'], filepaths['homemade_data'], filepaths['bert_train_in'])
+
+        # run training
+        print("training model")
+        os.chdir(filepaths["bert_location"])
+        print('dir:')
+        os.system('dir')
+        os.system("sh train.sh")
+        print("Finished training")
+        os.chdir(filepaths["get_home"])
+        timings['TRAIN'] = start_time
+
+        with open(TIME_FILE, 'wb') as F:
+            pickle.dump(timings, F)
+
+
+
+    time.sleep(3)
+
+
+    # ~~~ SPIDER ~~~
+
+    start_time = time.time()
+    if FORCE_SPIDER or (time.time() - timings['SPIDER']) >= TWENTY_FOUR_HOURS:
+        # Grabs news articles and places into database -- should be every 12 hours
+        # use dok_matrix()
+        # Make a matrix of every day of news
+        #
+
+        resetdir(filepaths['bert_process_loading_in'], [])
+
+        print("PROCESS LOOP")
+        from jsvnews.src import process_loop
+        process_loop.run(out_file=filepaths['bert_process_loading_in'],
+                         feedlist=os.path.join(filepaths['rssfeedlist'], 'rssfeeds.txt')) #, fromdatabase=READDATABASE)
+
+        # TODO: Create script: converts news articles into sentiment matrices
+        # Put news articles into emailscripts/newssource
+        # Run unprocessed article text through model
+        # Run the model on prepared articles
+
+        print("BERT PROCESS BATCHES")
+        from jsvnews.src import bert_process_batch
+        #BERT_DIR, HOME_DIR, BATCH_DIR, BERT_IN_DIR, BERT_OUT_FILE
+        bert_process_batch.run(BERT_DIR=filepaths['bert_location'],
+                               HOME_DIR=filepaths['get_home'],
+                               BATCH_DIR=filepaths['bert_process_loading_in'],
+                               BERT_IN_DIR=filepaths['bert_process_in'],
+                               BERT_OUT_FILE=os.path.join(filepaths['bert_process_out'], 'labels.txt' ))
+
+    if True:
+        print("RESULTS 2 MATRICES")
+        # associate articles with sentiment scores
+        from jsvnews.src import results2matrix
+        results2matrix.run(filepaths['bert_process_loading_in'],
+                           filepaths['matrix_out'])
+
+        # TODO: Create profile system: Update profiles with sentiment matrices
+        # TODO: Store compressed daily matrices
+        timings['SPIDER'] = start_time
+
+    if RESET:
+        reset_all_dirs(filepaths)
 
     with open(TIME_FILE, 'wb') as F:
         pickle.dump(timings, F)
-
-
-
-time.sleep(3)
-
-
-# ~~~ SPIDER ~~~
-
-start_time = time.time()
-if FORCE_SPIDER or (time.time() - timings['SPIDER']) >= TWENTY_FOUR_HOURS:
-    # Grabs news articles and places into database -- should be every 12 hours
-    # use dok_matrix()
-    # Make a matrix of every day of news
-    #
-
-    resetdir(filepaths['bert_process_loading_in'], [])
-
-    print("PROCESS LOOP")
-    from src import process_loop
-    process_loop.run(out_file=filepaths['bert_process_loading_in'],
-                     feedlist=os.path.join(filepaths['rssfeedlist'], 'rssfeeds.txt')) #, fromdatabase=READDATABASE)
-
-    # TODO: Create script: converts news articles into sentiment matrices
-    # Put news articles into emailscripts/newssource
-    # Run unprocessed article text through model
-    # Run the model on prepared articles
-
-    print("BERT PROCESS BATCHES")
-    from src import bert_process_batch
-    #BERT_DIR, HOME_DIR, BATCH_DIR, BERT_IN_DIR, BERT_OUT_FILE
-    bert_process_batch.run(BERT_DIR=filepaths['bert_location'],
-                           HOME_DIR=filepaths['get_home'],
-                           BATCH_DIR=filepaths['bert_process_loading_in'],
-                           BERT_IN_DIR=filepaths['bert_process_in'],
-                           BERT_OUT_FILE=os.path.join(filepaths['bert_process_out'], 'labels.txt' ))
-
-if True:
-    print("RESULTS 2 MATRICES")
-    # associate articles with sentiment scores
-    from jsvnews.src import results2matrix
-    results2matrix.run(filepaths['bert_process_loading_in'],
-                       filepaths['matrix_out'])
-
-    # TODO: Create profile system: Update profiles with sentiment matrices
-    # TODO: Store compressed daily matrices
-    timings['SPIDER'] = start_time
-
-if RESET:
-    reset_all_dirs(filepaths)
-
-with open(TIME_FILE, 'wb') as F:
-    pickle.dump(timings, F)

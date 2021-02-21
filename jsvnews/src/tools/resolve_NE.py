@@ -3,9 +3,10 @@
 import re
 #import spacy
 #from collections import Counter
-import en_core_web_sm
+#import en_core_web_sm
 #import pprint
 import urllib.request
+import spacy
 
 def cleanBody(body):
     body = body.replace('’', '\'').replace('‘', '\'').replace('…', '...')
@@ -15,7 +16,7 @@ def cleanBody(body):
     return body.strip()
 
 
-nlp = en_core_web_sm.load() #TODO get better/bigger model?
+nlp = spacy.load("en_core_web_sm") #en_core_web_sm.load() #TODO get better/bigger model?
 NERs = {'PERSON', 'EVENT', 'ORG', 'GPE', 'NORP', 'LOC', 'PRODUCT', 'WORK_OF_ART', 'LAW', 'LANGUAGE'}
 combiningLabels = set(['PERSON', 'ORG'])
 best_wiki_guess_no = re.compile(r'>[^<]+?<')

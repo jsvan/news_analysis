@@ -65,6 +65,7 @@ def run(out_file, feedlist, fromdatabase=''):
             except Exception as e:
                 #continue
                 print(e, e.__doc__)
+                input("process_loop wait")
 
         print("ENDING")
         db.on_end()

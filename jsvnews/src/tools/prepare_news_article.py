@@ -4,8 +4,8 @@ from googletrans import Translator
 translator = Translator()
 import langdetect
 from jsvnews.src.tools import resolve_NE
-
-tokenizer = BertTokenizer.from_pretrained(os.path.join('jsvnews', 'lib','ABSA_BERT_MODEL','bert-linear-commonsents-finetune'))   # BertTokenizer.from_pretrained(os.path.join('..', 'ABSA_BERT', 'BERT-E2E-ABSA', "bert-linear-rest15-finetune"))
+import definitions
+tokenizer = BertTokenizer.from_pretrained(os.path.join(definitions.ROOT_DIR, 'jsvnews', 'lib','ABSA_BERT_MODEL','bert-linear-commonsents-finetune'))   # BertTokenizer.from_pretrained(os.path.join('..', 'ABSA_BERT', 'BERT-E2E-ABSA', "bert-linear-rest15-finetune"))
 import re
 import string
 

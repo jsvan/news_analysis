@@ -26,12 +26,14 @@ if os.path.exists('README.md'):
 else:
     long_description = ''
 
+#import spacy
+#spacy.download('en_core_web_sm')
 # exec
 # ----
 setup(
     name="jsvnews",
     version="0.1.0",
-    packages=['jsnews'],
+    packages= find_packages(), #['jsvnews'],
     license='',
     author='Julian Vanecek',
     author_email='julian.vanecek@gmail.com',
@@ -52,6 +54,11 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+    ],
+    scripts=[
+            'definitions.py',
+            'jsvnews/run.py',
+            'jsvnews/src/viz_biz/sentchart_topic.py'
     ],
     test_suite='tests',
 )

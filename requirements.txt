@@ -3,7 +3,6 @@ requests
 feedparser
 numpy
 spacy
-python -m spacy download en_core_web_sm
 easygui
 langdetect
 sklearn
