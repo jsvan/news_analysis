@@ -43,7 +43,7 @@ the pipeline
 other scripts
 -------------
 run \
-`import jsvnews.src.viz_biz.sentchart_topic as sct`
+`import jsvnews.src.viz_biz.sentchart_topic as sct` \
 `sct.run("Trump")` \
 to view a matplotlib graph of sentiments related to Trump over the past 6 months. \
 Sorry not sorry about bad namings.
