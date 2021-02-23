@@ -49,6 +49,17 @@ to view a matplotlib graph of sentiments related to Trump over the past 6 months
 Sorry not sorry about bad namings.
 
 
+pretty pictures
+---------------
+Clustering of newspapers \
+![Cluster of newspapers](./jsvnews/src/viz_biz/images/newspaper_cluster.png) \
+Comparing sentiments of Trump \
+![Sentiment comparissons of Trump](./jsvnews/src/viz_biz/images/Newspapers_and_Trump.jpeg) \
+Net sentiment scores of Trump over the past 6 months (each point avg over past week scores) \
+![Sentiment scores for Trump over time](./jsvnews/src/viz_biz/images/trump_overtime.jpg)
+
+
+
 Repo Architecture 
 =================
 
