@@ -56,7 +56,7 @@ Clustering of newspapers \
 Comparing sentiments of Trump \
 ![Sentiment comparissons of Trump](./jsvnews/src/viz_biz/images/Newspapers_and_Trump.jpeg) \
 Net sentiment scores of Trump over the past 6 months (each point avg over past week scores) \
-![Sentiment scores for Trump over time](./jsvnews/src/viz_biz/images/trump_overtime.jpg)
+![Sentiment scores for Trump over time](./jsvnews/src/viz_biz/images/trump_overtime.png)
 
 
 
