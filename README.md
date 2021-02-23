@@ -40,6 +40,14 @@ the pipeline
 8) Run articles through BERT model, every [MASK] token receives a sentiment score.
 9) Save a matrix for every publisher on that day's topic-sentiment counts
 
+other scripts
+-------------
+run \
+`import jsvnews.src.viz_biz.sentchart_topic as sct`
+`sct.run("Trump")` \
+to view a matplotlib graph of sentiments related to Trump over the past 6 months. \
+Sorry not sorry about bad namings.
+
 
 Repo Architecture 
 =================
