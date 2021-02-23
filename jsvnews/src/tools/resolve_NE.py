@@ -7,6 +7,8 @@ import re
 #import pprint
 import urllib.request
 import spacy
+import definitions
+import os
 
 def cleanBody(body):
     body = body.replace('’', '\'').replace('‘', '\'').replace('…', '...')
@@ -15,14 +17,15 @@ def cleanBody(body):
     body = body.replace('—', '-').replace('–', '-')
     return body.strip()
 
-
+cwd = definitions.ROOT_DIR
 nlp = spacy.load("en_core_web_sm") #en_core_web_sm.load() #TODO get better/bigger model?
 NERs = {'PERSON', 'EVENT', 'ORG', 'GPE', 'NORP', 'LOC', 'PRODUCT', 'WORK_OF_ART', 'LAW', 'LANGUAGE'}
 combiningLabels = set(['PERSON', 'ORG'])
 best_wiki_guess_no = re.compile(r'>[^<]+?<')
 re_title = re.compile(r'<title>.*? - Wikipedia</title>')
 wiki_url = "https://en.wikipedia.org/wiki/"
-words2resolved_file = "./words2resolved.txt"
+words2resolved_file = os.path.join(cwd, "words2resolved.txt")
+
 fakeNE = set()
 realNE = dict()
 try:

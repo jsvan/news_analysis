@@ -24,7 +24,7 @@ class WF:
 
 
 
-def run(out_file, feedlist, fromdatabase=''):
+def run(out_file, feedlist, fromdatabase='', one_url=''):
     """
 
     :param out_file:
@@ -35,12 +35,16 @@ def run(out_file, feedlist, fromdatabase=''):
     ARTICLE_LINE_LIMIT = 1500
     cnt = 0
     db = mydb.DB()
-    if not fromdatabase:
-        print("scraping")
-        scrapedArticles = getNews.Scraper().scrape(feedlist)  # generator
-    else:
+    if fromdatabase:
         print(f"Getting from database {fromdatabase}")
         scrapedArticles = getNews.fromdb(fromdatabase)
+    elif one_url:
+        print(f"getting from url {one_url}")
+        scrapedArticles = getNews.Scraper().scrape_url(url)  # generator
+    else:
+        print("scraping")
+        scrapedArticles = getNews.Scraper().scrape_rss(feedlist)  # generator
+
     # filegen = WF(out_dir).generate()
     # outfile = filegen.__next__()
     towrite = []

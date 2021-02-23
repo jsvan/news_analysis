@@ -1,10 +1,12 @@
 from readability import Document
+from readability.readability import Unparseable
 import requests
 import re
 import feedparser
 
 from jsvnews.database import mydb
 
+DEBUG = False
 
 def fromdb(databasename):
     db, c = mydb.DB(databasename).on_start()
@@ -65,14 +67,14 @@ class Scraper:
         self.scrapedArticle['newspaper'] = ''
         self.scrapedArticle['article'] = ''
 
-    def scrape(self, rssfeedlist):
+    def scrape_rss(self, rssfeedlist):
         with open(rssfeedlist, 'r') as RSSs:
             for rss in RSSs:
                 count = 0
                 #print("\nCollecting from", rss)
                 for entry in feedparser.parse(rss).entries:
                     try:
-                        if count > 0: # return just 2
+                        if DEBUG and count > 0: # return just 2
                             break
                         count +=1
                         #print('\r', count, end='')
@@ -81,15 +83,19 @@ class Scraper:
                         time = entry.published
                         #print(Document(requests.get(link).text))
 
-                        body = self.cleanBody(Document(requests.get(link).text).summary())
-                        self.scrapedArticle['title'] = title
-                        self.scrapedArticle['timepublished'] = time
-                        self.scrapedArticle['url'] = link
-                        self.scrapedArticle['newspaper'] = link.split('/')[2]
-                        self.scrapedArticle['article'] = body
-                        if body:
+                        self.scrapedArticle = self.scrape_url(link, title, time)
+
+                        if self.scrapedArticle['article']:
                             #print(body[:15])
                             yield self.scrapedArticle
-                    except ConnectionError as E:
+                    except (ConnectionError, Unparseable) as E:
                         print(E, E.__doc__)
                         continue
+
+    def scrape_url(self, link, title='', time=''):
+        self.scrapedArticle['title'] = title
+        self.scrapedArticle['timepublished'] = time
+        self.scrapedArticle['url'] = link
+        self.scrapedArticle['newspaper'] = link.split('/')[2]
+        self.scrapedArticle['article'] = self.cleanBody(Document(requests.get(link).text).summary())
+        return self.scrapedArticle
