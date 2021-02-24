@@ -4,7 +4,9 @@ from datetime import datetime, timedelta
 from matplotlib import pyplot
 import numpy as np
 
-
+"""
+Use these classes to get matrix information
+"""
 class SentByDate:
     """
     Nested dictionaries of sentiments per day per publisher
@@ -208,7 +210,16 @@ class DataGetter:
     groups = [conservative, liberal, forpol]
 
     def query_topic(self, plotword, by='week', earlystop=0, strongopinions=0, avg=True, reset=False):
-        #This filters the dataset for topics you want and combines all related topics together into one.
+        """
+        This filters the dataset for topics you want and combines all related topics together into one.
+        :param plotword: The word/topic/named entity you'd like to filter the dataset for
+        :param by: Averages the data by the previous 'week'/by 'publisher' (remove time component)/by 'day'.
+        :param earlystop: bound 0<x<1, reads x% of each publisher's data (used for testing, or for memory constraints)
+        :param strongopinions: removes any topic-sentiment entries which have less than n occurances. Ie, filter out extraneous mentions.
+        :param avg: Whether you want this function to return an averaged sentiment value (True) or a sentiment mention three-tuple (False)
+        :param reset: (True) reload the data from disk, to incorproate your new parameters. (False) Use the cached dataset of the previous parameters for speedy delivery.
+        :return: a new nested dict of form {publisher:{date:sentimentscores}}
+        """
         dataset = self._get_data(by, earlystop, strongopinions, reset)
         related_idxs = self._related_terms(plotword)
         dataset = self._filter_for_related(dataset, related_idxs, avg)

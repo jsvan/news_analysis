@@ -1,5 +1,5 @@
 from jsvnews.src.viz_biz.plot_design import mark
-from jsvnews.src.tools import data_getter
+from jsvnews.src import data_getter
 from matplotlib import pyplot
 
 """
