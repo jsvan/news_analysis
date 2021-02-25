@@ -149,25 +149,39 @@ class DataGetter:
                     read_matrices.add2dict(toret, [publisher, date], sentunit)
         return toret
 
+    def related_idxs2list(self, related_idxs):
+        return list({idx2word[x] for x in related_idxs})
+
     def create_title(self, related_idxs):
-        tit = ', '.join(list({idx2word[x] for x in related_idxs}))
+        posstit = self.related_idxs2list(related_idxs)
+        posstit.sort(key=lambda s: len(s))
+        print(posstit)
+        posstit = posstit[:5]
+        tit = ', '.join(posstit)
         toret = []
         i = 0
         while i < len(tit):
-            newi = min(i+250, len(tit))
+            newi = min(i+50, len(tit))
             toret.append(tit[i:newi])
             i = newi
         return '\n'.join(toret)
 
-    def plot(self, plotter, related_idxs):
+    def plot(self, plotter, plotword, saveto=''):
         # pyplot.ylim(-1, 1)
         pyplot.axhline(0, color='black')
         pyplot.scatter(0, 0, color='white', s=55)
         myXs, xwhere = plotter.getXTicks()
+        print(myXs)
+        pyplot.title(plotword)
         pyplot.xticks(xwhere, myXs, rotation=45)
-        pyplot.title(self.create_title(related_idxs))
-        pyplot.legend()
-        pyplot.show()
+        lgd = pyplot.legend(loc='center right', bbox_to_anchor=(2, 1))
+        print(saveto)
+        if saveto:
+            print(f"Saving image to {saveto}")
+            pyplot.savefig(saveto, dpi=300, bbox_inches='tight', pad_inches=0.5, bbox_extra_artists=(lgd,))
+        else:
+            pyplot.show()
+        pyplot.clf()
 
     def _get_data(self, by, earlystop, strongopinions, reset=False):
         if self.DS and not reset:
@@ -223,7 +237,7 @@ class DataGetter:
         dataset = self._get_data(by, earlystop, strongopinions, reset)
         related_idxs = self._related_terms(plotword)
         dataset = self._filter_for_related(dataset, related_idxs, avg)
-        return dataset, related_idxs
+        return dataset, self.related_idxs2list(related_idxs)
         #return SentByDate(dataset)
 
     def query_topic_SentByDate_type(self, query_topic_output):

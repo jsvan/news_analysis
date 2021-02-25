@@ -30,9 +30,9 @@ liberal = {"rssfeeds.usatoday.com", "webfeeds.brookings.edu", "www.businessinsid
 forpol = {"meduza.io", "foreignpolicy.com", "news.ifeng.com","www.theepochtimes.com", "webfeeds.brookings.edu"}
 groups = [conservative, liberal, forpol]
 M = mark()
-def run(plotword, by='week', earlystop=0, strongopinions=0):
-    mygetter = data_getter.DataGetter()
-    dataset, related_idxs = mygetter.query_topic(plotword,by,earlystop,strongopinions)
+mygetter = data_getter.DataGetter()
+def run(plotword, by='week', earlystop=0, strongopinions=0, saveto=''):
+    dataset, names = mygetter.query_topic(plotword,by,earlystop,strongopinions)
     plotter = data_getter.SentByDate(dataset)
     #for group in groups:
     if True:
@@ -43,9 +43,9 @@ def run(plotword, by='week', earlystop=0, strongopinions=0):
             x, y = plotter.prepare_data(dataset[publisher])
             pyplot.plot(x, y, color=M.color(i))
             pyplot.scatter(x, y, color=M.color(i), marker=M.marker(i), s=5)
-        mygetter.plot(plotter, related_idxs)
 
-    return dataset
+        mygetter.plot(plotter, plotword, saveto)
+    return dataset, names
     # FOr each publisher
     # Prepare the data into an array of sentiments
 
