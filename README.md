@@ -58,6 +58,7 @@ Comparing sentiments of Trump \
 Net sentiment scores of Trump over the past 6 months (each point avg over past week scores) \
 ![Sentiment scores for Trump over time](./jsvnews/src/viz_biz/images/trump_overtime.png)
 
+![image](https://user-images.githubusercontent.com/9337973/179077056-6311b9dd-4b2a-4e03-8152-f04824a7c13a.png)
 
 
 Repo Architecture 
